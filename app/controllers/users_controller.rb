@@ -1,4 +1,32 @@
+# require 'base64'
+
 class UsersController < ApplicationController
+  def upload_image
+    img = params[:img]
+    return if img.nil?
+
+    # Decode the image from base 64
+    img = Base64.decode64(img)
+
+    # Write the image to a file.
+    unique_identifier = Time.now.to_i
+    img_file = File.new("../../public/images/collage/#{unique_identifier}.jpg", "w")
+
+    if img_file
+      img_file.syswrite(img)
+    end
+
+    img_file.close
+  end
+
+  def get_collage
+    user = User.find_by_id(params[:id])
+
+    @collage_url = user.collage unless user.nil?
+
+    render :layout => 'collage_response'
+  end
+
   # GET /users
   # GET /users.xml
   def index
