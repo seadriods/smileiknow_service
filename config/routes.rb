@@ -1,4 +1,10 @@
 Smileiknow::Application.routes.draw do
+  resources :orders
+
+  resources :products
+
+  resources :users
+
   get "home/index"
 
   # The priority is based upon order of creation:
