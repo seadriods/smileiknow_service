@@ -44,6 +44,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        Notifier.order_recieved(@order).deliver
         format.html { redirect_to(@order, :notice => 'Order was successfully created.') }
         format.xml  { render :xml => @order, :status => :created, :location => @order }
       else

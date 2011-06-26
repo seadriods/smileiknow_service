@@ -1,0 +1,110 @@
+<table>
+<tr>
+	<td colspan="2">
+		Thanks for your order, <%= @order.user.name %>!
+		<br /><br />
+		<strong>Want to manage your order online?</strong><br />
+If you need to check the status of your order or make changes, please visit our home page at Seadriods Amazon.com and click on Your Account at the top of any page.
+	</td>
+	
+</tr>
+<tr style="background-color:#0033CC; color: white">
+	<td colspan="2">
+	<h4>Order Summary</h4>
+	</td>
+	</tr>
+	<tr>
+		<td>
+			<h4>Order #:</h4>
+		</td>
+		<td style="text-align: left"> 
+			<%= @order.id %>
+		</td>		
+	</tr>
+	
+	<tr>
+		<td>
+			<h4>Shipping Method:</h4>
+		</td>
+		<td style="text-align: left"> 
+			Two-Day Shipping
+		</td>		
+	</tr>
+	
+	<tr>
+		<td>
+			<h4>Shipping Preference:</h4>
+		</td>
+		<td style="text-align: left"> 
+			I want my items faster. Ship them as they become available.
+		</td>		
+	</tr>
+	<tr>
+		<td>
+			Subtotal of Items: 
+		</td>
+		<td style="text-align: left"> 
+			$<%= @order.product.price %>
+		</td>		
+	</tr> 
+	<tr>
+		<td>
+			Shipping & Handling:
+		</td>
+		<td style="text-align: left"> 
+			$0.00
+		</td>		
+	</tr>
+ 	 <tr>
+		<td>
+			Total before tax: 
+		</td>
+		<td style="text-align: left"> 
+			$<%= @order.product.price %>
+		</td>		
+	</tr> 
+  	 <tr>
+		<td>
+			Estimated Tax To Be Collected:
+		</td>
+		<td style="text-align: left"> 
+			$0.00
+		</td>		
+	</tr>
+	<tr>
+		<td>
+			
+		</td>
+		<td style="text-align: left"> 
+			------<br />
+  	 		$<%= @order.product.price %><br />
+  	 		$0.00<br />
+ 	 		------
+		</td>		
+	</tr>
+ 	 <tr>
+		<td>
+			<h4>Total for this Order:</h4>
+		</td>
+		<td style="text-align: left"> 
+			$<%= @order.product.price %>
+		</td>		
+	</tr>
+  	 
+<tr>
+	<td colspan="2">
+		Delivery estimate: June 29, 2011<br />
+1 &nbsp; &nbsp;	 "<%= @order.product.name %>" <br />
+<br />
+In Stock
+<br />
+   
+		
+	</td>
+</tr>
+ 
+<tr>
+	<td colspan="2">Thank you for shopping at Amazon's Seadriods Store.</td>
+</tr>
+</table>
+
