@@ -1,22 +1,24 @@
-# require 'base64'
-
 class UsersController < ApplicationController
   def upload_image
     img = params[:img]
-    return if img.nil?
-
-    # Decode the image from base 64
-    img = Base64.decode64(img)
-
-    # Write the image to a file.
-    unique_identifier = Time.now.to_i
-    img_file = File.new("../../public/images/collage/#{unique_identifier}.jpg", "w")
-
-    if img_file
-      img_file.syswrite(img)
+    if img.nil?
+      render :text => "INVALID", :layout => false
+      return false
     end
 
-    img_file.close
+    
+    # Write the image to a file.
+    img_name = "#{Time.now.to_i}.jpeg"
+    File.open("public/images/collage/#{img_name}", "wb") do |file|
+      file.write(img)
+    end
+    
+    image = Image.new
+    image.name = img_name
+    image.user_id = params[:id]
+    image.save   
+    
+    render :text => 'SUCCESS', :layout => false 
   end
 
   def get_collage

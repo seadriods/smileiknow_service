@@ -7,7 +7,7 @@ Smileiknow::Application.routes.draw do
 
   get "home/index"
 
-  match 'users/:id/pushImage' => 'users#upload_image'
+  match 'users/:id/pushImg' => 'users#upload_image'
   match 'users/:id/getCollage' => 'users#get_collage'
 
   # The priority is based upon order of creation:
