@@ -1,4 +1,9 @@
 <table>
+	<tr
+	<td colspan="2">
+		<img src="http://192.168.74.102:3000/users/<%=@order.user.id -%>/getCollage">
+		</td>
+	</tr>
 <tr>
 	<td colspan="2">
 		Thanks for your order, <%= @order.user.name %>!
@@ -10,12 +15,12 @@ If you need to check the status of your order or make changes, please visit our 
 </tr>
 <tr style="background-color:#0033CC; color: white">
 	<td colspan="2">
-	<h4>Order Summary</h4>
+	<strong>Order Summary</strong>
 	</td>
 	</tr>
 	<tr>
 		<td>
-			<h4>Order #:</h4>
+			<strong>Order #:</strong>
 		</td>
 		<td style="text-align: left"> 
 			<%= @order.id %>
@@ -24,7 +29,7 @@ If you need to check the status of your order or make changes, please visit our 
 	
 	<tr>
 		<td>
-			<h4>Shipping Method:</h4>
+			<strong>Shipping Method:</strong>
 		</td>
 		<td style="text-align: left"> 
 			Two-Day Shipping
@@ -33,7 +38,7 @@ If you need to check the status of your order or make changes, please visit our 
 	
 	<tr>
 		<td>
-			<h4>Shipping Preference:</h4>
+			<strong>Shipping Preference:</strong>
 		</td>
 		<td style="text-align: left"> 
 			I want my items faster. Ship them as they become available.
@@ -84,7 +89,7 @@ If you need to check the status of your order or make changes, please visit our 
 	</tr>
  	 <tr>
 		<td>
-			<h4>Total for this Order:</h4>
+			<strong>Total for this Order:</strong>
 		</td>
 		<td style="text-align: left"> 
 			$<%= @order.product.price %>

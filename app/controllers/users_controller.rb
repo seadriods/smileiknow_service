@@ -18,15 +18,53 @@ class UsersController < ApplicationController
     image.user_id = params[:id]
     image.save   
     
+    #also invalidate user's collage
+    user = User.find(params[:id])
+    user.collage = nil
+    user.save
+    
     render :text => 'SUCCESS', :layout => false 
   end
 
   def get_collage
     user = User.find_by_id(params[:id])
+    base_url = "public/images/collage/"
+    if !params[:m].nil? && params[:m] == "mobile"
+      collage = 'smileout_25.png'
+    else
+      collage = 'smileout_50.png'
+    end
 
-    @collage_url = user.collage unless user.nil?
-
-    render :layout => 'collage_response'
+    unless user.nil?
+      
+      if user.collage.blank?
+        #create collage
+        i = 0
+        user.images.all(:order =>"id desc",:limit =>4).reverse.each do |img|
+          `convert public/images/collage/#{img.name} -resize 200x200^ -gravity center -extent 200x200 public/images/collage/img#{i}.png`
+          i = i+1
+        end
+        if i > 0
+          collage = "#{user.id}_collage_#{Time.now.to_i}.png"
+          `montage public/images/collage/img*.png -tile 4x1 -geometry +0+0 public/images/collage/row.png`
+          `convert public/images/collage/row.png -alpha set -virtual-pixel transparent -channel A -blur 0x8 -level 50%,100% +channel public/images/collage/soft_row.png`
+          `composite public/images/collage/soft_row.png public/images/collage/pane.png public/images/collage/frame.png`
+          `composite -gravity SouthWest -geometry +42+0 public/images/collage/yellowsmile.gif public/images/collage/frame.png -alpha Set public/images/collage/#{collage}`
+          `convert public/images/collage/#{collage} -resize 25% public/images/collage/mobile_#{collage}`              
+          
+          user.collage = collage
+          user.save
+        end       
+      else
+        collage = user.collage
+      end
+      
+      if !params[:m].nil? && params[:m] == "mobile"
+        collage = "mobile_#{collage}"
+      end
+    end
+    #render :text => "#{base_url}#{collage}"
+    send_file "#{base_url}#{collage}", :type => 'image/png', :disposition => 'inline'
   end
 
   # GET /users
